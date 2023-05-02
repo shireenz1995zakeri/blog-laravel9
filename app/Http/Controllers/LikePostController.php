@@ -7,12 +7,10 @@ use App\Models\Post;
 
 class LikePostController extends Controller
 {
-    public function store(Post $post)
-    {
+    public function store(Post $post){
         $post->likes()->toggle(
             auth()->user()->id
         );
-
-        return response(['ok'], 200);
+        return response(['ok'],200);
     }
 }

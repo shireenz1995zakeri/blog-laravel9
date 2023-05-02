@@ -23,7 +23,7 @@ Route::get('/post/{post:slug}', [ShowPostController::class, 'show'])->name('post
 Route::get('/search', [SearchPostController::class, 'show'])->name('post.search');
 Route::get('/category/{category:slug}', [ShowPostCategoryController::class, 'show'])->name('category.show');
 
-Route::middleware('auth')->post('/comment', [StoreCommentController::class, 'store'])->name('comment.store');
+Route::middleware(['auth'])->post('/comment', [StoreCommentController::class, 'store'])->name('comment.store');
 
 Route::middleware(['auth', 'throttle:like'])->post('/like/{post:slug}', [LikePostController::class, 'store'])->name('like.post');
 

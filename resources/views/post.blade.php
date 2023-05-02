@@ -54,7 +54,7 @@
                         <h3 class="comments__h3"> دیدگاه خود را بنویسید </h3>
                         <span class="comments__count"> نظرات ( {{ $post->comments_count }} ) </span>
                     </div>
-                    <form action="{{ route('comment.store')}}" method="post">
+                    <form action="{{ route('comment.store') }}" method="post">
                         @csrf
                         <input type="hidden" name="comment_id" value="" id="reply-input">
                         <input type="hidden" name="post_id" value="{{$post->id}}">

@@ -17,10 +17,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 
-        'email', 
-        'password',
+        'name',
         'mobile',
+        'email',
+        'password',
         'role',
         'profile'
     ];
@@ -31,7 +31,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
     /**
@@ -42,12 +43,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function getRoleInFarsi(){
-        if($this->role === 'user') return 'کاربر عادی';
-        if($this->role === 'author') return 'نویسنده ';
-        if($this->role === 'admin') return 'مدیر';
-        
+
+    public function likes()
+    {
+        return $this->belongsToMany(Post::class, 'likes');
     }
+
+    public function getRoleInFarsi()
+    {
+        if ($this->role === 'user') return 'کاربر عادی';
+        if ($this->role === 'author') return 'نویسنده';
+        if ($this->role === 'admin') return 'مدیر';
+    }
+
     public function getCreatedAtInJalali()
     {
         return verta($this->created_at)->format('Y/m/d');
@@ -57,7 +65,5 @@ class User extends Authenticatable
     {
         return asset('images/users/' . $this->profile);
     }
-    public function likes(){
-        return $this->belongsToMany(Post::class,'likes');
-    }
+    //asset('blog/panel/img/pro.jpg')
 }
